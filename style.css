@@ -1,0 +1,251 @@
+*,
+*::before,
+*::after {
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  /* padding-top: 200px; --> */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+  
+  background: #1d131f;
+}
+
+header {
+  margin-top:2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  z-index: 999999;
+}
+
+
+
+nav ul{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+
+.navbar a {
+  width: 6rem;
+  height: 6rem;
+  padding: 2.2rem 2.2rem; 
+  margin: 0 1rem;
+  text-decoration: none;
+  
+  /* Flexbox for centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontally centers text */
+  align-items: center;     /* Vertically centers text */
+  
+  color: #F5F5F5;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 0.7rem;
+  line-height: 1.5;
+}
+
+nav a:hover{
+  background-color: #321b27;
+}
+
+.hideOnDesktop{
+  display: none;
+}
+
+
+.about-container{
+  text-align: center;
+  color: #F5F5F5;
+  margin-top: 0%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.about-container h1{
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+.songs-container{
+  margin-top:2rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  
+  z-index: 999999;
+}
+
+.songs ul{
+  padding-left: 30%;
+  padding-right: 30%;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+
+
+.songs a {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 1.5rem 1.5rem; 
+  margin: 0 1rem;
+  text-decoration: none;
+  
+  /* Flexbox for centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontally centers text */
+  align-items: center;     /* Vertically centers text */
+  
+  background-color: #321b27;
+  color: #F5F5F5;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 0.7rem;
+  margin: 5px; /* Space between items */
+}
+
+.songs a:hover{
+  background-color: #4a2d36;
+}
+
+
+
+
+
+
+
+
+footer {
+  color: #F5f5f5;
+  padding: 10px;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}
+
+@media(max-width: 800px) {
+  /* For mobile phones: */
+  body{
+    width: 100%;
+  }
+
+  .hideOnMobile{
+    display: none;
+  }
+  
+  .hideOnDesktop{
+    display: block;
+  }
+
+  .sidebar{
+    width: 25%;
+  }
+  
+  .hero{
+    height: 30rem;
+  }
+
+  .om-oss-container h1{
+    font-size: 5rem;
+  }
+  .om-oss-container p{
+    font-size: 1.2rem;
+  }
+
+  .öppettider-container h1{
+    font-size: 3.5rem;
+  }
+  .öppettider-container p{
+    font-size: 1.2rem;
+  }
+
+  .meny-container h1{
+    font-size: 3.5rem;
+  }
+  .meny-container p{
+    font-size: 1.2rem;
+  }
+
+  .kontakt-container h1{
+    font-size: 2rem;
+  }
+  .kontakt-container p{
+    font-size: 1rem;
+  }
+
+}
+
+
+@media(max-width: 400px){
+  .navbar li:first-child{
+    font-size: 1.1rem;
+  }
+
+  .sidebar{
+    width: 100%;
+    background-color: #732a6e;
+    backdrop-filter: blur(0);
+  }
+
+  .hero{
+    height: 15rem;
+  }
+
+  .om-oss-container h1{
+    font-size: 2.5rem;
+  }
+  .om-oss-container p{
+    font-size: 1rem;
+  }
+  
+  .öppettider-container h1{
+    font-size: 2rem;
+  }
+  .öppettider-container p{
+    font-size: 1rem;
+  }
+
+  .meny-container h1{
+    font-size: 2rem;
+  }
+  .meny-text a {
+    padding: 1rem 1rem;
+    width: 7rem;
+    font-size: 1rem;
+  }
+
+  .kontakt-container h1{
+    font-size: 1.4rem;
+  }
+  .kontakt-container p{
+    font-size: 0.9rem;
+  }
+
+  .column-kontakt {
+    height: 16rem
+  }
+
+}

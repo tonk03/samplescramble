@@ -64,9 +64,6 @@ nav a:hover{
   background-color: #321b27;
 }
 
-.hideOnDesktop{
-  display: none;
-}
 
 
 .about-container{
@@ -90,18 +87,22 @@ nav a:hover{
   width: 100%;
   
   z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .songs ul{
-  padding-left: 30%;
-  padding-right: 30%;
+  width: 50%;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  justify-content: flex;
   align-items: center;
   gap: 10px;
   
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
 
@@ -152,14 +153,7 @@ footer {
     width: 100%;
   }
 
-  .hideOnMobile{
-    display: none;
-  }
-  
-  .hideOnDesktop{
-    display: block;
-  }
-
+ 
   .sidebar{
     width: 25%;
   }

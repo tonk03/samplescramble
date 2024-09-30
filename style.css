@@ -22,8 +22,8 @@ body {
 }
 
 header {
-  margin-top:2rem;
-  margin-bottom: 2rem;
+  padding-top:2rem;
+  padding-bottom: 1rem;
   width: 100%;
   z-index: 999999;
 }
@@ -66,73 +66,87 @@ nav a:hover{
 
 
 
-.about-container{
+.intro-container{
   text-align: center;
   color: #F5F5F5;
   margin-top: 0%;
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   line-height: 1.5;
 }
 
-.about-container h1{
+.intro-container h1{
   font-weight: bold;
   font-style: italic;
+  font-size: 1.7rem;
 }
 
+.genre-container {
+  width: 21.1rem;
+  border-radius: 0.7rem; 
+  flex-wrap: wrap;             /* Allows items to wrap to a new line if needed */
+  margin: auto;              /* Center the container itself */
 
-.songs-container{
-  margin-top:2rem;
-  margin-bottom: 2rem;
-  width: 100%;
+  background-color: #321b27;
+  text-align: center;
+  color: #F5F5F5;
+}
+
+.genre-image {
+  padding: 0.45rem;
+  padding-bottom: 0;
+  width: 100%; /* Ensures the image takes up the full width */
+  object-fit: cover;
   
-  z-index: 999999;
+}
+
+.genre-image img {
+  border-radius: 0.5rem; /* Inherits the parent's border radius */
+}
+
+.genre-container h1 {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.7rem;
+  padding-bottom: 0.45rem;
+}
+
+.genre-container p{
+  padding-bottom: 0.45rem;
+}
+
+.songs-container {
+  padding-top:1rem;
+  padding-bottom: 3rem;
+  width: 22rem;
+  display: flex;
+  justify-content: flex-start; /* Align items starting from the left */
+  align-items: center;         /* Vertically center items */
+  flex-wrap: wrap;             /* Allows items to wrap to a new line if needed */
+  margin: auto;              /* Center the container itself */
+}
+
+.songs-box a{
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #321b27;
+  margin: 0.45rem;            /* Calculate this by taking container width (22), divide by amount of boxes per row (5) and subtracting box width (3.5) and dividing by 2 to get the margin  */
+  border-radius: 0.7rem; 
+  
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.songs ul{
-  width: 50%;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex;
-  align-items: center;
-  gap: 10px;
   
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
-}
 
-
-
-.songs a {
-  width: 1.5rem;
-  height: 1.5rem;
-  padding: 1.5rem 1.5rem; 
-  margin: 0 1rem;
   text-decoration: none;
-  
-  /* Flexbox for centering */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Horizontally centers text */
-  align-items: center;     /* Vertically centers text */
-  
-  background-color: #321b27;
-  color: #F5F5F5;
   font-size: 1.3rem;
-  cursor: pointer;
-  border-radius: 0.7rem;
-  margin: 5px; /* Space between items */
+  color: #F5F5F5;
 }
 
-.songs a:hover{
+
+.songs-box a:hover{
   background-color: #4a2d36;
 }
-
-
 
 
 

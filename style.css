@@ -1,13 +1,12 @@
 *,
 *::before,
 *::after {
-
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -15,67 +14,61 @@
 body {
   min-height: 100vh;
   /* padding-top: 200px; --> */
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 
-  
   background: #1d131f;
 }
 
 header {
-  padding-top:2rem;
+  padding-top: 2rem;
   padding-bottom: 1rem;
   width: 100%;
   z-index: 999999;
 }
 
-
-
-nav ul{
+nav ul {
   list-style: none;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  
 }
-
 
 .navbar a {
   width: 6rem;
   height: 6rem;
-  padding: 2.2rem 2.2rem; 
+  padding: 2.2rem 2.2rem;
   margin: 0 1rem;
   text-decoration: none;
-  
+
   /* Flexbox for centering */
   display: flex;
   flex-direction: column;
   justify-content: center; /* Horizontally centers text */
-  align-items: center;     /* Vertically centers text */
-  
-  color: #F5F5F5;
+  align-items: center; /* Vertically centers text */
+
+  color: #f5f5f5;
   font-size: 1.3rem;
   cursor: pointer;
   border-radius: 0.7rem;
   line-height: 1.5;
 }
 
-nav a:hover{
+nav a:hover {
   background-color: #321b27;
 }
 
-
-
-.intro-container{
+.intro-container {
   text-align: center;
-  color: #F5F5F5;
+  color: #f5f5f5;
   margin-top: 0%;
   padding-top: 1rem;
   padding-bottom: 1.5rem;
   line-height: 1.5;
 }
 
-.intro-container h1{
+.intro-container h1 {
   font-weight: bold;
   font-style: italic;
   font-size: 1.7rem;
@@ -83,13 +76,13 @@ nav a:hover{
 
 .genre-container {
   width: 21.1rem;
-  border-radius: 0.7rem; 
-  flex-wrap: wrap;             /* Allows items to wrap to a new line if needed */
-  margin: auto;              /* Center the container itself */
+  border-radius: 0.7rem;
+  flex-wrap: wrap; /* Allows items to wrap to a new line if needed */
+  margin: auto; /* Center the container itself */
 
   background-color: #321b27;
   text-align: center;
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
 .genre-image {
@@ -97,7 +90,6 @@ nav a:hover{
   padding-bottom: 0;
   width: 100%; /* Ensures the image takes up the full width */
   object-fit: cover;
-  
 }
 
 .genre-image img {
@@ -111,132 +103,122 @@ nav a:hover{
   padding-bottom: 0.45rem;
 }
 
-.genre-container p{
+.genre-container p {
   padding-bottom: 0.45rem;
 }
 
 .songs-container {
-  padding-top:1rem;
+  padding-top: 1rem;
   padding-bottom: 15rem;
   width: 22rem;
   display: flex;
   justify-content: flex-start; /* Align items starting from the left */
-  align-items: center;         /* Vertically center items */
-  flex-wrap: wrap;             /* Allows items to wrap to a new line if needed */
-  margin: auto;              /* Center the container itself */
+  align-items: center; /* Vertically center items */
+  flex-wrap: wrap; /* Allows items to wrap to a new line if needed */
+  margin: auto; /* Center the container itself */
 }
 
-.songs-box a{
+.songs-box a {
   width: 3.5rem;
   height: 3.5rem;
   background-color: #321b27;
-  margin: 0.45rem;            /* Calculate this by taking container width (22), divide by amount of boxes per row (5) and subtracting box width (3.5) and dividing by 2 to get the margin  */
-  border-radius: 0.7rem; 
-  
+  margin: 0.45rem; /* Calculate this by taking container width (22), divide by amount of boxes per row (5) and subtracting box width (3.5) and dividing by 2 to get the margin  */
+  border-radius: 0.7rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
 
   text-decoration: none;
   font-size: 1.3rem;
-  color: #F5F5F5;
+  color: #f5f5f5;
 }
 
-
-.songs-box a:hover{
+.songs-box a:hover {
   background-color: #4a2d36;
 }
 
-
-
-
-
-
 footer {
-  color: #F5f5f5;
+  color: #f5f5f5;
   padding: 10px;
   text-align: center;
   bottom: 0;
   width: 100%;
 }
 
-@media(max-width: 800px) {
+@media (max-width: 800px) {
   /* For mobile phones: */
-  body{
+  body {
     width: 100%;
   }
 
- 
-  .sidebar{
+  .sidebar {
     width: 25%;
   }
-  
-  .hero{
+
+  .hero {
     height: 30rem;
   }
 
-  .om-oss-container h1{
+  .om-oss-container h1 {
     font-size: 5rem;
   }
-  .om-oss-container p{
+  .om-oss-container p {
     font-size: 1.2rem;
   }
 
-  .öppettider-container h1{
+  .öppettider-container h1 {
     font-size: 3.5rem;
   }
-  .öppettider-container p{
+  .öppettider-container p {
     font-size: 1.2rem;
   }
 
-  .meny-container h1{
+  .meny-container h1 {
     font-size: 3.5rem;
   }
-  .meny-container p{
+  .meny-container p {
     font-size: 1.2rem;
   }
 
-  .kontakt-container h1{
+  .kontakt-container h1 {
     font-size: 2rem;
   }
-  .kontakt-container p{
+  .kontakt-container p {
     font-size: 1rem;
   }
-
 }
 
-
-@media(max-width: 400px){
-  .navbar li:first-child{
+@media (max-width: 400px) {
+  .navbar li:first-child {
     font-size: 1.1rem;
   }
 
-  .sidebar{
+  .sidebar {
     width: 100%;
     background-color: #732a6e;
     backdrop-filter: blur(0);
   }
 
-  .hero{
+  .hero {
     height: 15rem;
   }
 
-  .om-oss-container h1{
+  .om-oss-container h1 {
     font-size: 2.5rem;
   }
-  .om-oss-container p{
-    font-size: 1rem;
-  }
-  
-  .öppettider-container h1{
-    font-size: 2rem;
-  }
-  .öppettider-container p{
+  .om-oss-container p {
     font-size: 1rem;
   }
 
-  .meny-container h1{
+  .öppettider-container h1 {
+    font-size: 2rem;
+  }
+  .öppettider-container p {
+    font-size: 1rem;
+  }
+
+  .meny-container h1 {
     font-size: 2rem;
   }
   .meny-text a {
@@ -245,15 +227,14 @@ footer {
     font-size: 1rem;
   }
 
-  .kontakt-container h1{
+  .kontakt-container h1 {
     font-size: 1.4rem;
   }
-  .kontakt-container p{
+  .kontakt-container p {
     font-size: 0.9rem;
   }
 
   .column-kontakt {
-    height: 16rem
+    height: 16rem;
   }
-
 }

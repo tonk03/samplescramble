@@ -3,7 +3,7 @@ const searchBar = document.getElementById('searchBar');
 let debounceTimeout;
 
 async function searchTracks(query) {
-    const searchUrl = `http://localhost:3000/search?q=${encodeURIComponent(query)}`;
+    const searchUrl = `https://samplescramble.vercel.app?q=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(searchUrl);
@@ -13,6 +13,7 @@ async function searchTracks(query) {
         console.error("Error fetching tracks:", error);
     }
 }
+
 
 function displaySongs(songs) {
     const htmlString = songs

@@ -3,7 +3,7 @@ const searchBar = document.getElementById('searchBar');
 let debounceTimeout;
 
 async function searchTracks(query) {
-    const searchUrl = `https://samplescramble.vercel.app?q=${encodeURIComponent(query)}`;
+    const searchUrl = `https://samplescramble.vercel.app/api/search?q=${encodeURIComponent(query)}`;
 
     try {
         const response = await fetch(searchUrl);

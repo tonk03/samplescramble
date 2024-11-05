@@ -1,11 +1,11 @@
 {
   "name": "spotify-proxy",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "api/search.js",
   "dependencies": {
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "start": "vercel dev"
+    "dev": "vercel dev"
   }
 }

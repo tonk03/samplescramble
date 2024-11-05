@@ -1,6 +1,17 @@
 const fetch = require('node-fetch');
 
 module.exports = async (req, res) => {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:5500'); // Allow all origins
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    // Handle preflight (OPTIONS) request
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
     try {
         const clientID = process.env.CLIENT_ID;
         const clientSecret = process.env.CLIENT_SECRET;

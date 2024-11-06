@@ -1,13 +1,13 @@
 // Get audio element and controls
 const audio = document.getElementById("myAudio");
 const playIcon = document.getElementById("playIcon");
-const pauseIcond = document.getElementById("pauseIcon");
+const pauseIcon = document.getElementById("pauseIcon");
 const progressBar = document.getElementById("progressBar");
 
 // Control variables
 let timeoutId;
 let progressInterval;
-let songLength = 10000; // 10 seconds
+window.songLength = 3000; // 3 seconds
 
 // Function to handle play/pause toggle
 function playPauseAudio() {

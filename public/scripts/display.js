@@ -31,6 +31,9 @@ function displayGuessedSongs() {
 
 // Function to hide the guessed songs list
 function hideGuessedSongs(event) {
+    // Prevent hiding if the correct answer has been guessed
+    if (isFinalAnswer) return;
+
     const guessedSongsWrapper = document.getElementById('guessedSongsWrapper');
 
     // Check if the click occurred outside of the guessed songs wrapper
@@ -38,6 +41,7 @@ function hideGuessedSongs(event) {
         guessedSongsWrapper.style.display = 'none';
     }
 }
+
 
 // Attach event listener to each health item link
 document.querySelectorAll('.health-item a').forEach(item => {
@@ -49,3 +53,4 @@ document.querySelectorAll('.health-item a').forEach(item => {
 
 // Attach an event listener to the document to hide the guessed songs list when clicking outside
 document.addEventListener('click', hideGuessedSongs);
+

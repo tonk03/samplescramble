@@ -81,10 +81,15 @@
       <h1>SampleScramble</h1>
       <p>Scramble That Sample: Which Song Borrowed That Sample?</p>
     </div>
+    
 
+    
+
+    <audio id="myAudio" src="song.mp3"></audio>
     <!-- Change below here for new songs -->
 
-    <audio id="myAudio" src="badboy.mp3"></audio>
+    <div id="correctSong" data-name="Doja" data-artist="Central Cee"></div>
+
 
     <!-- Change above here for new songs -->
 
@@ -120,21 +125,17 @@
       </div>
     </div>
 
-
-
     <div class="healthMeter">
       <ul class="healthbar">
         <li class="health-item"><a ></a></li>
         <li class="health-item"><a ></a></li>
         <li class="health-item"><a ></a></li>
       </ul>
+
+      
+    
+
     </div>
-    
-    
-
-
-
-    <div id="correctSong" data-name="Blinding Lights" data-artist="The Weeknd"></div>
 
     <div id="searchWrapper">
       <input
@@ -145,14 +146,19 @@
       />
     </div>
 
+    
     </div>
-      <ul id="songsList"></ul>
+      <ul id="songsList" class="song-list"></ul>
     </div>
 
     <div id="guessedSongsWrapper" style="display: none;">
+      
+      <ul id="rightSong" class="song-list"></ul>
       <h2>Guessed Songs</h2>
       <ul id="guessedSongsList" class="song-list"></ul>
     </div>
+    </div>
+  </div>
   
   
   

@@ -1,23 +1,25 @@
+// search.js
+
 const songsList = document.getElementById('songsList');
 const searchBar = document.getElementById('searchBar');
 let debounceTimeout;
 
+// Function to search tracks by querying the backend
 async function searchTracks(query) {
-    const searchUrl = `https://samplescramble.vercel.app/api/search?q=${encodeURIComponent(query)}`;
-
     try {
-        const response = await fetch(searchUrl);
+        const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
         const data = await response.json();
-        displaySongs(data);
+        displaySongs(data); // Pass data directly from backend response
     } catch (error) {
-        console.error("Error fetching tracks:", error);
+        console.error("Error performing search:", error);
     }
 }
 
-
+// Display songs in the HTML
 function displaySongs(songs) {
     const htmlString = songs
-        .map((song) => `
+        .map((song) => {
+            return `
             <li class="song-item">
                 <div class="song-thumbnail">
                     <img src="${song.album.images[0]?.url}" alt="${song.name} cover" />
@@ -27,7 +29,8 @@ function displaySongs(songs) {
                     <p class="song-artist">${song.artists[0].name}</p>
                 </div>
             </li>
-        `)
+            `;
+        })
         .join('');
     songsList.innerHTML = htmlString;
 }
@@ -38,16 +41,19 @@ function debounce(func, delay) {
     debounceTimeout = setTimeout(func, delay);
 }
 
+// Event listener for the search bar
 searchBar.addEventListener('keyup', (e) => {
     const query = e.target.value;
+    
     if (query.length >= 4) {
-        debounce(() => searchTracks(query), 300);
+        debounce(() => searchTracks(query), 300); // Debounce API calls by 300ms
     } else {
-        songsList.innerHTML = "";
+        songsList.innerHTML = ""; // Clear results if the search bar is empty
     }
 });
 
+// Clear the search bar when clicking outside of it
 searchBar.addEventListener('blur', () => {
-    searchBar.value = '';
-    songsList.innerHTML = '';
+    searchBar.value = '';         // Clear the input value
+    songsList.innerHTML = '';      // Clear the displayed song list
 });

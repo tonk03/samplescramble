@@ -76,7 +76,7 @@ nav a:hover {
 }
 
 .genre-container {
-  width: 21.1rem;
+  width: 21.1rem;     /*take .songs-container width and subtract by the 2*margin*/
   border-radius: 0.7rem;
   flex-wrap: wrap; /* Allows items to wrap to a new line if needed */
   margin: auto; /* Center the container itself */
@@ -106,6 +106,8 @@ nav a:hover {
 
 .genre-container p {
   padding-bottom: 0.45rem;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .songs-container {
@@ -148,95 +150,27 @@ footer {
   width: 100%;
 }
 
-@media (max-width: 800px) {
-  /* For mobile phones: */
-  body {
-    width: 100%;
-  }
 
-  .sidebar {
-    width: 25%;
-  }
-
-  .hero {
-    height: 30rem;
-  }
-
-  .om-oss-container h1 {
-    font-size: 5rem;
-  }
-  .om-oss-container p {
-    font-size: 1.2rem;
-  }
-
-  .öppettider-container h1 {
-    font-size: 3.5rem;
-  }
-  .öppettider-container p {
-    font-size: 1.2rem;
-  }
-
-  .meny-container h1 {
-    font-size: 3.5rem;
-  }
-  .meny-container p {
-    font-size: 1.2rem;
-  }
-
-  .kontakt-container h1 {
-    font-size: 2rem;
-  }
-  .kontakt-container p {
-    font-size: 1rem;
-  }
-}
 
 @media (max-width: 400px) {
-  .navbar li:first-child {
-    font-size: 1.1rem;
-  }
-
-  .sidebar {
-    width: 100%;
-    background-color: #732a6e;
-    backdrop-filter: blur(0);
-  }
-
-  .hero {
-    height: 15rem;
-  }
-
-  .om-oss-container h1 {
-    font-size: 2.5rem;
-  }
-  .om-oss-container p {
-    font-size: 1rem;
-  }
-
-  .öppettider-container h1 {
-    font-size: 2rem;
-  }
-  .öppettider-container p {
-    font-size: 1rem;
-  }
-
-  .meny-container h1 {
-    font-size: 2rem;
-  }
-  .meny-text a {
-    padding: 1rem 1rem;
-    width: 7rem;
-    font-size: 1rem;
-  }
-
-  .kontakt-container h1 {
-    font-size: 1.4rem;
-  }
-  .kontakt-container p {
+  .intro-container {
+    padding-left: 5%;
+    padding-right: 5%;
     font-size: 0.9rem;
   }
-
-  .column-kontakt {
-    height: 16rem;
+  .intro-container h1{
+    font-size: 1.6rem;
   }
+  .genre-container {
+    width: 19rem;          /*take .songs-container width and subtract by the 2*margin*/
+  }
+  .songs-container {
+    width: 20rem;
+  }
+  .songs-box a {
+    width: 3rem;
+    height: 3rem;
+    margin: 0.5rem;
+  }
+  
 }

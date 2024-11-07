@@ -4,6 +4,12 @@
 function displayGuessedSongs() {
     const guessedSongsContainer = document.getElementById('guessedSongsList');
     const guessedSongsWrapper = document.getElementById('guessedSongsWrapper');
+    const hintsContainer = document.getElementById("hintContainer");
+    const skipButtonWrapper = document.getElementById("skipButtonWrapper");
+    
+    // Hide hints and skip button when displaying guessed songs
+    if (hintsContainer) hintsContainer.style.display = "none";
+    skipButtonWrapper.style.display = "none";
 
     // Check if guessedSongs has any items; if not, don't display
     if (guessedSongs.length === 0) {
@@ -29,6 +35,7 @@ function displayGuessedSongs() {
     guessedSongsWrapper.style.display = 'block';
 }
 
+
 // Function to hide the guessed songs list
 function hideGuessedSongs(event) {
     // Prevent hiding if the correct answer has been guessed
@@ -39,6 +46,8 @@ function hideGuessedSongs(event) {
     // Check if the click occurred outside of the guessed songs wrapper
     if (!guessedSongsWrapper.contains(event.target) && !event.target.closest('.health-item a')) {
         guessedSongsWrapper.style.display = 'none';
+        if (hintsContainer) hintsContainer.style.display = "block";
+        skipButtonWrapper.style.display = "block";
     }
 }
 

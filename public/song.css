@@ -1,0 +1,404 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  /* padding-top: 200px; --> */
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+
+  background: #1d131f;
+}
+
+header {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  z-index: 999999;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+.navbar a {
+  width: 6rem;
+  height: 6rem;
+  padding: 2.2rem 2.2rem;
+  margin: 0 1rem;
+  text-decoration: none;
+
+  /* Flexbox for centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontally centers text */
+  align-items: center; /* Vertically centers text */
+
+  color: #f5f5f5;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border-radius: 0.7rem;
+  line-height: 1.5;
+  transition: background-color 0.3s ease;     /* Smooth color change on hover */
+}
+
+nav a:hover {
+  background-color: #321b27;
+}
+
+.intro-container {
+  text-align: center;
+  color: #f5f5f5;
+  margin-top: 0%;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+  line-height: 1.5;
+}
+
+.intro-container h1 {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.7rem;
+}
+
+.button-container {
+  width: 30rem;
+  height: 12rem;
+  border-radius: 0.7rem;
+  margin: auto;
+  position: relative;
+  background-color: #321b27;
+  transition: background-color 0.3s ease;     /* Smooth color change on hover */
+  display: flex;
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  cursor: pointer;
+}
+
+.button-container:hover {
+  background-color: #4a2d36;
+}
+
+#pauseIcon {
+  display: none;
+}
+
+#progress-container {
+  width: 100%; /* Adjust width as needed */
+  height: 0.5rem;
+  background-color: #f5f5f5;
+  border-radius: 0 0 0.7rem 0.7rem; /* Rounded corners on bottom only */
+  overflow: hidden;
+  position: absolute;
+  bottom: 0rem; /* Position at the bottom of the button container */
+}
+
+#progressBar {
+  width: 0;
+  height: 100%;
+  background-color: #2845a1; /* Progress bar color */
+  transition: width 0.1s; /* Smooth transition */
+}
+
+/* Health Meter Styling */
+
+.healthMeter {
+  width: 30rem;
+  border-radius: 0.7rem;
+  margin: auto;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.healthbar {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.health-item a {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 1rem;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  background-color: #321b27;
+  color: #f5f5f5;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.health-item a:hover {
+  background-color: #4a2d36;
+}
+
+.health-item.correct a {
+  background-color: #22c55e; /* Correct color */
+}
+
+.health-item.incorrect a {
+  background-color: #ef4444; /* Incorrect color */
+}
+
+.health-item.color a {
+  background-color: #4a2d36 /* New color */
+}
+
+.healthMeter p {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #f5f5f5;
+}
+
+#searchWrapper {
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center; /* Centers vertically */
+  justify-content: center; /* Centers horizontally */
+  margin-top: 1rem;
+}
+
+#searchBar {
+  width: 30rem;
+  height: 2rem;
+  border-radius: 0.7rem;
+  background-color: #321b27;
+  color: #f5f5f5;
+  border: 0.15rem solid #f5f5f5;
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+#searchBar::placeholder {
+  color: #f5f5f5; /* Customize this color */
+  opacity: 1; /* Ensure full opacity if it's too light */
+  font-style: italic; /* Optional: Add styling like italic */
+}
+
+
+
+/* Common styles for both songsList and guessedSongsList */
+.song-list {
+  width: 30rem;
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #2c2c34;
+  border-radius: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.song-list .song-item {
+  border-radius: 0.7rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  color: #f5f5f5;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.song-list .song-item:hover {
+  background-color: #3c3c44;
+}
+
+.song-list .song-thumbnail img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 0.7rem;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.song-list .song-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+}
+
+.song-list .song-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.song-list .song-artist {
+  font-size: 1rem;
+  color: #b0b0b0;
+  margin: 0;
+}
+
+
+#guessedSongsWrapper {
+  width: 30rem;
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: #2c2c34;
+  border-radius: 0.7rem;
+  margin-top: 0.5rem;
+  overflow: visible;
+  z-index: 1000;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+#guessedSongsWrapper h2{
+  text-align: center;
+  padding-top: 1rem;
+  color: #f5f5f5;
+  font-size: 1.2rem;
+}
+
+
+/* Remove hover and cursor for guessedSongsWrapper */
+#guessedSongsWrapper .song-item {
+  transition: none;           /* Remove hover transition */
+  cursor: default;            /* Set cursor to default */
+}
+
+#guessedSongsWrapper .song-item:hover {
+  background-color: inherit;   /* Remove background change on hover */
+}
+
+#borrowedSong h2 {
+  padding: 0;
+  margin-top: 0;
+}
+
+
+
+
+#skipButtonWrapper {
+  text-align: center;
+  margin-top: 1rem;
+  border-radius: 0.7rem;
+}
+
+#skipButton {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #2c2c34; /* Button color */
+  color: #f5f5f5; /* Text color */
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#skipButton:hover {
+  background-color: #3c3c44; /* Darker color on hover */
+}
+
+
+#hintContainer {
+  color: #f5f5f5;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#hintContainer p{
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+#hintContainer, #skipButtonWrapper {
+  transition: opacity 0.3s ease;
+}
+
+
+
+/* Styles for screens 600px or less */
+@media (max-width: 600px) {
+  .intro-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .button-container,
+  .healthMeter,
+  #searchBar,
+  .song-list,
+  #guessedSongsWrapper {
+    width: 25rem; /* Adjust width for 600px */
+  }
+}
+
+/* Styles for screens 500x or less */
+@media (max-width: 500px) {
+  .intro-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  .button-container,
+  .healthMeter,
+  #searchBar,
+  .song-list,
+  #guessedSongsWrapper {
+    width: 21.1rem; /* Adjust width for 400px */
+  }
+}
+
+@media (max-width: 400px) {
+  .intro-container {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 0.9rem;
+  }
+  .intro-container h1{
+    font-size: 1.6rem;
+  }
+  .button-container,
+  .healthMeter,
+  #searchBar,
+  .song-list,
+  #guessedSongsWrapper {
+    width: 19rem; /* Adjust width for 400px */
+  }
+  .song-list .song-thumbnail img {
+    width: 4rem;
+    height: 4rem;
+  }
+  .song-list .song-title{
+    font-size: 1rem;
+  }
+  .song-list .song-artist{
+    font-size: 0.8rem;
+  }
+  #skipButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  #hintContainer p{
+    font-size: 0.8rem;
+  }
+}

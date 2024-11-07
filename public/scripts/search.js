@@ -120,9 +120,13 @@ function songCorrect(guess) {
         document.getElementById("skipButtonWrapper").style.display = "none";
         const healthMeter = document.querySelector(".healthMeter");
         healthMeter.style.backgroundColor = "#321b27";
-        healthMeter.style.height = "8rem";
         healthMeter.style.padding = "1rem";
         healthMeter.style.marginTop = "2rem";
+        if (window.matchMedia("(max-width: 400px)").matches) {
+          healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
+        } else {
+          healthMeter.style.height = "8rem"; // Reset height to default for larger screens
+        }
   
         const successMessage = document.createElement("p");
         successMessage.innerText = "You correctly scrambled the sample!";
@@ -132,7 +136,7 @@ function songCorrect(guess) {
         successMessage.style.marginBottom = "1rem";
         healthMeter.insertBefore(successMessage, healthMeter.firstChild);
   
-        displayCorrectSong();
+        
   
         window.songLength = 27000;
   
@@ -140,8 +144,8 @@ function songCorrect(guess) {
           const healthItem = healthItems[i];
           healthItem.classList.add("color");
         }
-  
-        setTimeout(displayGuessedSongs, 10);
+        displayCorrectSong();
+        setTimeout(displayGuessedSongs, 50);
       } else {
         item.classList.add("incorrect");
         window.songLength *= 3;
@@ -156,9 +160,13 @@ function songCorrect(guess) {
           document.getElementById("skipButtonWrapper").style.display = "none";
           const healthMeter = document.querySelector(".healthMeter");
           healthMeter.style.backgroundColor = "#321b27";
-          healthMeter.style.height = "8rem";
           healthMeter.style.padding = "1rem";
           healthMeter.style.marginTop = "2rem";
+          if (window.matchMedia("(max-width: 400px)").matches) {
+            healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
+          } else {
+            healthMeter.style.height = "8rem"; // Reset height to default for larger screens
+          }
   
           const failureMessage = document.createElement("p");
           failureMessage.innerText = "You could not scramble the sample!";
@@ -169,7 +177,7 @@ function songCorrect(guess) {
           healthMeter.insertBefore(failureMessage, healthMeter.firstChild);
   
           displayCorrectSong();
-          setTimeout(displayGuessedSongs, 10);
+          setTimeout(displayGuessedSongs, 50);
         }
       }
     }

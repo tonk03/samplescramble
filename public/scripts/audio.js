@@ -48,6 +48,6 @@ function toggleIcons(showPlay) {
 }
 
 function updateProgress() {
-  const progressPercent = (audio.currentTime / (songLength / 1000)) * 100;
+  const progressPercent = (audio.currentTime / (songLength / 1000)) * 107;  //110 instead of 100 to make it go longer
   progressBar.style.width = progressPercent + "%";
 }

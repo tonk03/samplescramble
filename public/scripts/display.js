@@ -1,21 +1,27 @@
 // display.js
 
-// Function to display the guessed songs list
 function displayGuessedSongs() {
     const guessedSongsContainer = document.getElementById('guessedSongsList');
     const guessedSongsWrapper = document.getElementById('guessedSongsWrapper');
     const hintsContainer = document.getElementById("hintContainer");
     const skipButtonWrapper = document.getElementById("skipButtonWrapper");
     
-    // Hide hints and skip button when displaying guessed songs
-    if (hintsContainer) hintsContainer.style.display = "none";
-    skipButtonWrapper.style.display = "none";
 
-    // Check if guessedSongs has any items; if not, don't display
     if (guessedSongs.length === 0) {
         guessedSongsWrapper.style.display = 'none';
         return;
     }
+    
+    // Hide hints and skip button when displaying guessed songs
+    if(hintsContainer) hintsContainer.style.display = "none";
+    skipButtonWrapper.style.display = "none"; // Ensure skipButtonWrapper is hidden
+
+    
+    console.log("Guessed Songs Wrapper Style Before:", guessedSongsWrapper.style.display);
+    console.log("Guessed Songs Wrapper Content:", guessedSongsContainer.innerHTML);
+    console.log("Is Skip Button Hidden?", skipButtonWrapper.style.display === "none");
+    // Check if guessedSongs has any items; if not, don't display
+    
 
     // Populate the guessed songs list
     guessedSongsContainer.innerHTML = guessedSongs
@@ -33,6 +39,8 @@ function displayGuessedSongs() {
 
     // Display the guessed songs wrapper
     guessedSongsWrapper.style.display = 'block';
+    
+
 }
 
 
@@ -41,13 +49,20 @@ function hideGuessedSongs(event) {
     // Prevent hiding if the correct answer has been guessed
     if (isFinalAnswer) return;
 
+    const hintsContainer = document.getElementById("hintContainer");
+    const skipButtonWrapper = document.getElementById("skipButtonWrapper");
+
     const guessedSongsWrapper = document.getElementById('guessedSongsWrapper');
 
+    if (guessedSongsWrapper && guessedSongsWrapper.style.display === 'none') {
+        return;
+    }
     // Check if the click occurred outside of the guessed songs wrapper
     if (!guessedSongsWrapper.contains(event.target) && !event.target.closest('.health-item a')) {
         guessedSongsWrapper.style.display = 'none';
-        if (hintsContainer) hintsContainer.style.display = "block";
+        hintsContainer.style.display = "block";
         skipButtonWrapper.style.display = "block";
+    
     }
 }
 

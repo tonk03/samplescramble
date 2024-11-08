@@ -18,36 +18,43 @@ function playPauseAudio() {
   }
 }
 
-// Start playing audio and initialize progress update
+let progressAnimationFrame;
+
 function startAudio() {
   audio.play();
   toggleIcons(false); // Show pause icon, hide play icon
 
-  // Update progress at regular intervals
-  progressInterval = setInterval(updateProgress, 50);
-
+  // Update progress using requestAnimationFrame
+  updateProgress();
+  
   // Set a timeout to stop audio after songLength time
   timeoutId = setTimeout(stopAudio, songLength);
 }
 
-// Stop audio and reset progress
 function stopAudio() {
   audio.load(); // Reload audio instead of pause to reset whole song
   toggleIcons(true); // Show play, hide pause icon
   progressBar.style.width = "0%"; // Reset progress bar
 
-  // Clear active intervals and timeouts
-  clearInterval(progressInterval); // Stop updating progress when audio stops
+  // Cancel the animation frame
+  cancelAnimationFrame(progressAnimationFrame);
   clearTimeout(timeoutId);
 }
+
+function updateProgress() {
+  const progressPercent = (audio.currentTime / (songLength / 1000)) * 107;
+  progressBar.style.width = progressPercent + "%";
+
+  // Continue updating only if audio is playing
+  if (!audio.paused) {
+    progressAnimationFrame = requestAnimationFrame(updateProgress);
+  }
+}
+
 
 // Toggle icons between play and pause states
 function toggleIcons(showPlay) {
   playIcon.style.display = showPlay ? "inline" : "none";
   pauseIcon.style.display = showPlay ? "none" : "inline";
 }
-
-function updateProgress() {
-  const progressPercent = (audio.currentTime / (songLength / 1000)) * 107;  //110 instead of 100 to make it go longer
-  progressBar.style.width = progressPercent + "%";
-}
+wait 

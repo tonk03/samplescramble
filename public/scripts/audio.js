@@ -18,10 +18,12 @@ function playPauseAudio() {
   }
 }
 
+let startTime;
 
 function startAudio() {
   audio.play();
   toggleIcons(false); // Show pause icon, hide play icon
+  startTime = Date.now(); // Record the start time
 
   // Update progress every 100ms
   progressInterval = setInterval(updateProgress, 100);
@@ -41,9 +43,12 @@ function stopAudio() {
 }
 
 function updateProgress() {
-  const progressPercent = (audio.currentTime / (songLength / 1000)) * 107;
-  progressBar.style.width = progressPercent + "%";
+  const elapsedTime = Date.now() - startTime; // Calculate elapsed time
+  const progressPercent = (elapsedTime / songLength) * 107;
+  progressBar.style.width = Math.min(progressPercent, 107) + "%"; // Cap at 107% if over
 }
+
+
 
 
 

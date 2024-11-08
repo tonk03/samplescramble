@@ -71,39 +71,38 @@ function songPress(selectedSongName, selectedArtistName, thumbnail) {
       .replace(/[^a-zåäöéèëüöçñáàâêîôûÿæœ]+/gi, ""); // Keep letters and common special characters
   }
 
-  // Sanitize and normalize both selected and correct song names and artist names
-  const normalizedSelectedName = normalizeString(selectedSongName);
-  const normalizedCorrectName = normalizeString(correctSong.name);
-  const normalizedSelectedArtist = normalizeString(selectedArtistName);
-  const normalizedCorrectArtist = normalizeString(correctSong.artist);
+  // Sanitize and normalize shortened song names and artist names for comparison only
+  const normalizedSelectedName = normalizeString(selectedSongName.slice(0, 4));
+  const normalizedCorrectName = normalizeString(correctSong.name.slice(0, 4));
+  const normalizedSelectedArtist = normalizeString(selectedArtistName.slice(0, 4));
+  const normalizedCorrectArtist = normalizeString(correctSong.artist.slice(0, 4));
 
-  // Log the final normalized strings for debugging
   console.log("Normalized Selected Name:", normalizedSelectedName);
   console.log("Normalized Correct Name:", normalizedCorrectName);
   console.log("Normalized Selected Artist:", normalizedSelectedArtist);
   console.log("Normalized Correct Artist:", normalizedCorrectArtist);
 
-  // Perform the isCorrect comparison
+  // Perform the isCorrect comparison with shortened strings
   const isCorrect =
     normalizedSelectedName === normalizedCorrectName &&
     normalizedSelectedArtist === normalizedCorrectArtist;
 
   const songGuess = {
-    name: selectedSongName,
-    artist: selectedArtistName,
+    name: selectedSongName, // Keep the full name
+    artist: selectedArtistName, // Keep the full artist name
     thumbnail: thumbnail,
     correct: isCorrect,
   };
 
-  // Add songGuess to guessedSongs array
   guessedSongs.push(songGuess);
 
-  // Clear the search bar and song list
-  searchBar.value = ""; // Clear the input value
-  songsList.innerHTML = ""; // Clear the displayed song list
+  searchBar.value = ""; 
+  songsList.innerHTML = ""; 
 
   songCorrect(songGuess);
 }
+
+
 
 
 

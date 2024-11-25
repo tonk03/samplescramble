@@ -11,18 +11,13 @@
   padding: 0;
 }
 
-html {
-  background-color: #1d131f; /* Match your desired background color */
-}
-
 body {
   min-height: 120vh;
   /* padding-top: 200px; --> */
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 
-  background: #1d131f;
-  margin-top: 0;
+  background-color: #1d131f;
 }
 
 header {
@@ -153,7 +148,6 @@ footer {
   text-align: center;
   bottom: 0;
   width: 100%;
-  margin-bottom: 0;
 }
 
 

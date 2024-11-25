@@ -283,8 +283,7 @@ nav a:hover {
 
 /* Remove hover and cursor for guessedSongsWrapper */
 #guessedSongsWrapper .song-item {
-  transition: none;           /* Remove hover transition */
-  cursor: default;            /* Set cursor to default */
+  /*transition: none;           /* Remove hover transition */
 }
 
 #guessedSongsWrapper .song-item:hover {

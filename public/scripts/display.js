@@ -5,43 +5,41 @@ function displayGuessedSongs() {
     const guessedSongsWrapper = document.getElementById('guessedSongsWrapper');
     const hintsContainer = document.getElementById("hintContainer");
     const skipButtonWrapper = document.getElementById("skipButtonWrapper");
-    
 
     if (guessedSongs.length === 0) {
         guessedSongsWrapper.style.display = 'none';
         return;
     }
-    
-    // Hide hints and skip button when displaying guessed songs
-    if(hintsContainer) hintsContainer.style.display = "none";
-    skipButtonWrapper.style.display = "none"; // Ensure skipButtonWrapper is hidden
 
-    
-    console.log("Guessed Songs Wrapper Style Before:", guessedSongsWrapper.style.display);
-    console.log("Guessed Songs Wrapper Content:", guessedSongsContainer.innerHTML);
-    console.log("Is Skip Button Hidden?", skipButtonWrapper.style.display === "none");
-    // Check if guessedSongs has any items; if not, don't display
-    
+    if (hintsContainer) hintsContainer.style.display = "none";
+    skipButtonWrapper.style.display = "none";
 
-    // Populate the guessed songs list
     guessedSongsContainer.innerHTML = guessedSongs
         .map(guess => `
-            <li class="song-item">
+            <li class="song-item" ${guess.name !== "Skipped" ? `data-url="${guess.url}"` : ''}>
                 <div class="song-thumbnail">
-                    <img src="${guess.thumbnail}" alt="${guess.name} cover" />
+                    <img src="${guess.thumbnail || ''}" alt="${guess.name} cover" />
                 </div>
                 <div class="song-info">
                     <h2 class="song-title">${guess.name}</h2>
-                    <p class="song-artist">${guess.artist}</p>
+                    <p class="song-artist">${guess.artist || 'Skipped Artist'}</p>
                 </div>
             </li>
         `).join('');
 
-    // Display the guessed songs wrapper
     guessedSongsWrapper.style.display = 'block';
-    
 
+    // Add click event listeners to non-skipped songs
+    const songItems = document.querySelectorAll('.song-item[data-url]');
+    songItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const url = item.getAttribute('data-url');
+            console.log(`Navigating to: ${url}`); // Console log to confirm URL
+            window.open(url, '_blank'); // Open the link in a new tab
+        });
+    });
 }
+
 
 
 // Function to hide the guessed songs list

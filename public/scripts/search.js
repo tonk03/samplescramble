@@ -55,27 +55,33 @@ function displaySongs(songs) {
   songItems.forEach((item, index) => {
     item.addEventListener("click", () => {
       const song = songs[index];
-      songPress(song.name, song.artists[0].name, song.album.images[0]?.url);
+      songPress(
+        song.name,
+        song.artists[0].name,
+        song.album.images[0]?.url,
+        song.external_urls.spotify
+      );
     });
   });
 }
 
-
-function songPress(selectedSongName, selectedArtistName, thumbnail) {
+function songPress(selectedSongName, selectedArtistName, thumbnail, url) {
   stopAudio();
 
   // Helper function to sanitize strings: remove all non-letter characters
   function normalizeString(str) {
-    return str
-      .toLowerCase()
-      .replace(/[^a-zåäöéèëüöçñáàâêîôûÿæœ]+/gi, ""); // Keep letters and common special characters
+    return str.toLowerCase().replace(/[^a-zåäöéèëüöçñáàâêîôûÿæœ]+/gi, ""); // Keep letters and common special characters
   }
 
   // Sanitize and normalize shortened song names and artist names for comparison only
   const normalizedSelectedName = normalizeString(selectedSongName.slice(0, 4));
   const normalizedCorrectName = normalizeString(correctSong.name.slice(0, 4));
-  const normalizedSelectedArtist = normalizeString(selectedArtistName.slice(0, 4));
-  const normalizedCorrectArtist = normalizeString(correctSong.artist.slice(0, 4));
+  const normalizedSelectedArtist = normalizeString(
+    selectedArtistName.slice(0, 4)
+  );
+  const normalizedCorrectArtist = normalizeString(
+    correctSong.artist.slice(0, 4)
+  );
 
   console.log("Normalized Selected Name:", normalizedSelectedName);
   console.log("Normalized Correct Name:", normalizedCorrectName);
@@ -91,30 +97,65 @@ function songPress(selectedSongName, selectedArtistName, thumbnail) {
     name: selectedSongName, // Keep the full name
     artist: selectedArtistName, // Keep the full artist name
     thumbnail: thumbnail,
+    url: url,
     correct: isCorrect,
   };
 
   guessedSongs.push(songGuess);
 
-  searchBar.value = ""; 
-  songsList.innerHTML = ""; 
+  searchBar.value = "";
+  songsList.innerHTML = "";
 
   songCorrect(songGuess);
 }
 
-
-
-
-
 function songCorrect(guess) {
-    const healthItems = document.querySelectorAll(".healthbar .health-item");
-    const index = guessedSongs.length - 1;
-  
-    if (index >= 0 && index < healthItems.length) {
-      const item = healthItems[index];
-      if (guess.correct) {
+  const healthItems = document.querySelectorAll(".healthbar .health-item");
+  const index = guessedSongs.length - 1;
+
+  if (index >= 0 && index < healthItems.length) {
+    const item = healthItems[index];
+    if (guess.correct) {
+      isFinalAnswer = true;
+      item.classList.add("correct");
+      document.getElementById("searchBar").style.display = "none";
+      document.getElementById("skipButtonWrapper").style.display = "none";
+      const healthMeter = document.querySelector(".healthMeter");
+      healthMeter.style.backgroundColor = "#321b27";
+      healthMeter.style.padding = "1rem";
+      healthMeter.style.marginTop = "2rem";
+      if (window.matchMedia("(max-width: 400px)").matches) {
+        healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
+      } else {
+        healthMeter.style.height = "8rem"; // Reset height to default for larger screens
+      }
+
+      const successMessage = document.createElement("p");
+      successMessage.innerText = "You correctly scrambled the sample!";
+      successMessage.style.color = "#f5f5f5";
+      successMessage.style.textAlign = "center";
+      successMessage.style.fontSize = "1.2rem";
+      successMessage.style.marginBottom = "1rem";
+      healthMeter.insertBefore(successMessage, healthMeter.firstChild);
+
+      window.songLength = 27000;
+
+      for (let i = guessedSongs.length; i < 3; i++) {
+        const healthItem = healthItems[i];
+        healthItem.classList.add("color");
+      }
+      displayCorrectSong();
+      setTimeout(displayGuessedSongs, 50);
+    } else {
+      item.classList.add("incorrect");
+      window.songLength *= 3;
+      incorrectCount += 1;
+
+      // Display hints based on incorrect count
+      displayHint(incorrectCount);
+
+      if (incorrectCount === 3) {
         isFinalAnswer = true;
-        item.classList.add("correct");
         document.getElementById("searchBar").style.display = "none";
         document.getElementById("skipButtonWrapper").style.display = "none";
         const healthMeter = document.querySelector(".healthMeter");
@@ -126,94 +167,7 @@ function songCorrect(guess) {
         } else {
           healthMeter.style.height = "8rem"; // Reset height to default for larger screens
         }
-  
-        const successMessage = document.createElement("p");
-        successMessage.innerText = "You correctly scrambled the sample!";
-        successMessage.style.color = "#f5f5f5";
-        successMessage.style.textAlign = "center";
-        successMessage.style.fontSize = "1.2rem";
-        successMessage.style.marginBottom = "1rem";
-        healthMeter.insertBefore(successMessage, healthMeter.firstChild);
-  
-        
-  
-        window.songLength = 27000;
-  
-        for (let i = guessedSongs.length; i < 3; i++) {
-          const healthItem = healthItems[i];
-          healthItem.classList.add("color");
-        }
-        displayCorrectSong();
-        setTimeout(displayGuessedSongs, 50);
-      } else {
-        item.classList.add("incorrect");
-        window.songLength *= 3;
-        incorrectCount += 1;
-  
-        // Display hints based on incorrect count
-        displayHint(incorrectCount);
-  
-        if (incorrectCount === 3) {
-          isFinalAnswer = true;
-          document.getElementById("searchBar").style.display = "none";
-          document.getElementById("skipButtonWrapper").style.display = "none";
-          const healthMeter = document.querySelector(".healthMeter");
-          healthMeter.style.backgroundColor = "#321b27";
-          healthMeter.style.padding = "1rem";
-          healthMeter.style.marginTop = "2rem";
-          if (window.matchMedia("(max-width: 400px)").matches) {
-            healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
-          } else {
-            healthMeter.style.height = "8rem"; // Reset height to default for larger screens
-          }
-  
-          const failureMessage = document.createElement("p");
-          failureMessage.innerText = "You could not scramble the sample!";
-          failureMessage.style.color = "#f5f5f5";
-          failureMessage.style.textAlign = "center";
-          failureMessage.style.fontSize = "1.2rem";
-          failureMessage.style.marginBottom = "1rem";
-          healthMeter.insertBefore(failureMessage, healthMeter.firstChild);
-  
-          displayCorrectSong();
-          setTimeout(displayGuessedSongs, 50);
-        }
-      }
-    }
-  }
-  
-  function skipRound() {
-    stopAudio();
-    const healthItems = document.querySelectorAll(".healthbar .health-item");
-    const index = guessedSongs.length;
-  
-    if (index < healthItems.length) {
-      const item = healthItems[index];
-      item.classList.add("incorrect");
-      window.songLength *= 3;
-      incorrectCount += 1;
-  
-      // Display hints based on incorrect count
-      displayHint(incorrectCount);
-  
-      // Show hints and skip button if guesses are hidden
-      if (hintsContainer) hintsContainer.style.display = "block";
-      skipButtonWrapper.style.display = "block";
-  
-      if (incorrectCount === 3) {
-        isFinalAnswer = true;
-        document.getElementById("searchBar").style.display = "none";
-        skipButtonWrapper.style.display = "none";
-        const healthMeter = document.querySelector(".healthMeter");
-        healthMeter.style.backgroundColor = "#321b27";
-        healthMeter.style.padding = "1rem";
-        healthMeter.style.marginTop = "2rem";
-        if (window.matchMedia("(max-width: 400px)").matches) {
-            healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
-          } else {
-            healthMeter.style.height = "8rem"; // Reset height to default for larger screens
-          }
-  
+
         const failureMessage = document.createElement("p");
         failureMessage.innerText = "You could not scramble the sample!";
         failureMessage.style.color = "#f5f5f5";
@@ -221,16 +175,61 @@ function songCorrect(guess) {
         failureMessage.style.fontSize = "1.2rem";
         failureMessage.style.marginBottom = "1rem";
         healthMeter.insertBefore(failureMessage, healthMeter.firstChild);
-  
+
         displayCorrectSong();
-        setTimeout(displayGuessedSongs, 10);
+        setTimeout(displayGuessedSongs, 50);
       }
-  
-      guessedSongs.push({ name: "Skipped", correct: false });
     }
   }
-  
-  
+}
+
+function skipRound() {
+  stopAudio();
+  const healthItems = document.querySelectorAll(".healthbar .health-item");
+  const index = guessedSongs.length;
+
+  if (index < healthItems.length) {
+    const item = healthItems[index];
+    item.classList.add("incorrect");
+    window.songLength *= 3;
+    incorrectCount += 1;
+
+    // Display hints based on incorrect count
+    displayHint(incorrectCount);
+
+    // Show hints and skip button if guesses are hidden
+    if (hintsContainer) hintsContainer.style.display = "block";
+    skipButtonWrapper.style.display = "block";
+
+    if (incorrectCount === 3) {
+      isFinalAnswer = true;
+      document.getElementById("searchBar").style.display = "none";
+      skipButtonWrapper.style.display = "none";
+      const healthMeter = document.querySelector(".healthMeter");
+      healthMeter.style.backgroundColor = "#321b27";
+      healthMeter.style.padding = "1rem";
+      healthMeter.style.marginTop = "2rem";
+      if (window.matchMedia("(max-width: 400px)").matches) {
+        healthMeter.style.height = "10rem"; // Set height to 10rem for small screens
+      } else {
+        healthMeter.style.height = "8rem"; // Reset height to default for larger screens
+      }
+
+      const failureMessage = document.createElement("p");
+      failureMessage.innerText = "You could not scramble the sample!";
+      failureMessage.style.color = "#f5f5f5";
+      failureMessage.style.textAlign = "center";
+      failureMessage.style.fontSize = "1.2rem";
+      failureMessage.style.marginBottom = "1rem";
+      healthMeter.insertBefore(failureMessage, healthMeter.firstChild);
+
+      displayCorrectSong();
+      setTimeout(displayGuessedSongs, 10);
+    }
+
+    guessedSongs.push({ name: "Skipped", correct: false });
+  }
+}
 
 // Debounce function to limit API calls
 function debounce(func, delay) {
@@ -259,7 +258,6 @@ searchBar.addEventListener("input", (e) => {
   }
 });
 
-
 // Add an event listener for clicks on the document
 document.addEventListener("click", (event) => {
   if (isFinalAnswer) return;
@@ -275,116 +273,130 @@ document.addEventListener("click", (event) => {
   }
 });
 
-
 function displayHint(incorrectCount) {
-    const hintsElement = document.getElementById("hints");
-    const skipButtonWrapper = document.getElementById("skipButtonWrapper");
-  
-    // Create the hint container if it doesn't already exist
-    let hintContainer = document.getElementById("hintContainer");
-    if (!hintContainer) {
-      hintContainer = document.createElement("div");
-      hintContainer.id = "hintContainer";
-      hintContainer.style.color = "#f5f5f5";
-      hintContainer.style.textAlign = "center";
-      hintContainer.style.fontSize = "1.2rem";
-      hintContainer.style.marginTop = "1rem";
-      skipButtonWrapper.appendChild(hintContainer);
-  
-      // Add the "Hints:" heading
-      const hintsHeading = document.createElement("p");
-      hintsHeading.innerText = "Hints:";
-      hintsHeading.style.color = "#9CA3AF"; // Soft gray color
-      hintsHeading.style.fontWeight = "bold";
-      hintsHeading.style.marginBottom = "0.5rem";
-      hintContainer.appendChild(hintsHeading);
-    }
-  
-    // Append hints based on the incorrect count
-    if (incorrectCount === 1) {
-      // Display release date on first incorrect guess
-      const releaseDateHint = document.createElement("p");
-      releaseDateHint.innerText = `Released ${hintsElement.getAttribute("data-date")}`;
-      hintContainer.appendChild(releaseDateHint);
-    } else if (incorrectCount === 2) {
-      // Display artist on second incorrect guess
-      const artistHint = document.createElement("p");
-      artistHint.innerText = `${hintsElement.getAttribute("data-artist")}`;
-      hintContainer.appendChild(artistHint);
-    }
+  const hintsElement = document.getElementById("hints");
+  const skipButtonWrapper = document.getElementById("skipButtonWrapper");
+
+  // Create the hint container if it doesn't already exist
+  let hintContainer = document.getElementById("hintContainer");
+  if (!hintContainer) {
+    hintContainer = document.createElement("div");
+    hintContainer.id = "hintContainer";
+    hintContainer.style.color = "#f5f5f5";
+    hintContainer.style.textAlign = "center";
+    hintContainer.style.fontSize = "1.2rem";
+    hintContainer.style.marginTop = "1rem";
+    skipButtonWrapper.appendChild(hintContainer);
+
+    // Add the "Hints:" heading
+    const hintsHeading = document.createElement("p");
+    hintsHeading.innerText = "Hints:";
+    hintsHeading.style.color = "#9CA3AF"; // Soft gray color
+    hintsHeading.style.fontWeight = "bold";
+    hintsHeading.style.marginBottom = "0.5rem";
+    hintContainer.appendChild(hintsHeading);
   }
-  
-  
 
+  // Append hints based on the incorrect count
+  if (incorrectCount === 1) {
+    // Display release date on first incorrect guess
+    const releaseDateHint = document.createElement("p");
+    releaseDateHint.innerText = `Released ${hintsElement.getAttribute(
+      "data-date"
+    )}`;
+    hintContainer.appendChild(releaseDateHint);
+  } else if (incorrectCount === 2) {
+    // Display artist on second incorrect guess
+    const artistHint = document.createElement("p");
+    artistHint.innerText = `${hintsElement.getAttribute("data-artist")}`;
+    hintContainer.appendChild(artistHint);
+  }
+}
 
+async function displayCorrectSong() {
+  const findCorrectSongName = correctSong.name;
+  const findCorrectSongArtist = correctSong.artist;
 
-  async function displayCorrectSong() {
-    const findCorrectSongName = correctSong.name;
-    const findCorrectSongArtist = correctSong.artist;
-  
-    try {
-      // Search by both song name and artist
+  try {
+      // Search by both correct song name and artist
       const query = `${findCorrectSongName} ${findCorrectSongArtist}`;
       const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
       const data = await response.json();
-  
-      // Display only the first matching song
+
       if (data.length > 0) {
-        const song = data[0];
-        const rightSongElement = document.getElementById("rightSong");
-  
-        // Add a heading with the text "The correct song was:"
-        rightSongElement.innerHTML = `
-                  <h2 style="text-align: center; color: #f5f5f5; font-size: 1.2rem; margin: 1rem 0 0 0;">
-                      The correct song was:
-                  </h2>
-                  <li class="song-item">
-                      <div class="song-thumbnail">
-                          <img src="${song.album.images[0]?.url}" alt="${song.name} cover" />
-                      </div>
-                      <div class="song-info">
-                          <h2 class="song-title">${song.name}</h2>
-                          <p class="song-artist">${song.artists[0].name}</p>
-                      </div>
-                  </li>
-              `;
+          const song = data[0];
+          const rightSongElement = document.getElementById("rightSong");
+
+          // Display the correct song
+          rightSongElement.innerHTML = `
+              <h2 style="text-align: center; color: #f5f5f5; font-size: 1.2rem; margin: 1rem 0 0 0;">
+                  The correct song was:
+              </h2>
+              <li class="song-item" ${song.external_urls.spotify ? `data-url="${song.external_urls.spotify}"` : ''}>
+                  <div class="song-thumbnail">
+                      <img src="${song.album.images[0]?.url}" alt="${song.name} cover" />
+                  </div>
+                  <div class="song-info">
+                      <h2 class="song-title">${song.name}</h2>
+                      <p class="song-artist">${song.artists[0].name}</p>
+                  </div>
+              </li>
+          `;
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Error fetching the correct song:", error);
-    }
-  
-    const findSampledSongName = sampledSong.name;
-    const findSampledSongArtist = sampledSong.artist;
-  
-    try {
+  }
+
+  const findSampledSongName = sampledSong.name;
+  const findSampledSongArtist = sampledSong.artist;
+
+  try {
       // Search by both sampled song name and artist
       const querySampled = `${findSampledSongName} ${findSampledSongArtist}`;
       const response = await fetch(`/api/search?q=${encodeURIComponent(querySampled)}`);
       const data = await response.json();
-  
-      // Display only the first matching song for the sampled song
+
       if (data.length > 0) {
-        const song = data[0];
-        const borrowedSongElement = document.getElementById("borrowedSong");
-  
-        // Add a heading with the text "Here’s the song that was sampled:"
-        borrowedSongElement.innerHTML = `
-                  <h2 style="text-align: center; color: #f5f5f5; font-size: 1.2rem; margin: 0;">
-                      Here’s the song that was sampled:
-                  </h2>
-                  <li class="song-item">
-                      <div class="song-thumbnail">
-                          <img src="${song.album.images[0]?.url}" alt="${song.name} cover" />
-                      </div>
-                      <div class="song-info">
-                          <h2 class="song-title">${song.name}</h2>
-                          <p class="song-artist">${song.artists[0].name}</p>
-                      </div>
-                  </li>
-              `;
+          const song = data[0];
+          const borrowedSongElement = document.getElementById("borrowedSong");
+
+          // Display the sampled song
+          borrowedSongElement.innerHTML = `
+              <h2 style="text-align: center; color: #f5f5f5; font-size: 1.2rem; margin: 0;">
+                  Here’s the song that was sampled:
+              </h2>
+              <li class="song-item" ${song.external_urls.spotify ? `data-url="${song.external_urls.spotify}"` : ''}>
+                  <div class="song-thumbnail">
+                      <img src="${song.album.images[0]?.url}" alt="${song.name} cover" />
+                  </div>
+                  <div class="song-info">
+                      <h2 class="song-title">${song.name}</h2>
+                      <p class="song-artist">${song.artists[0].name}</p>
+                  </div>
+              </li>
+          `;
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Error fetching the sampled song:", error);
-    }
   }
-  
+
+  // Add click functionality for correct and sampled songs
+  const correctSongItem = document.querySelector('#rightSong .song-item[data-url]');
+  if (correctSongItem) {
+      correctSongItem.addEventListener('click', (e) => {
+          const url = correctSongItem.getAttribute('data-url');
+          console.log(`Navigating to correct song: ${url}`); // Debugging log
+          window.open(url, '_blank'); // Open the link in a new tab
+      });
+  }
+
+  const sampledSongItem = document.querySelector('#borrowedSong .song-item[data-url]');
+  if (sampledSongItem) {
+      sampledSongItem.addEventListener('click', (e) => {
+          const url = sampledSongItem.getAttribute('data-url');
+          console.log(`Navigating to sampled song: ${url}`); // Debugging log
+          window.open(url, '_blank'); // Open the link in a new tab
+      });
+  }
+}
+

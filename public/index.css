@@ -11,6 +11,10 @@
   padding: 0;
 }
 
+html {
+  background-color: #1d131f; /* Match your desired background color */
+}
+
 body {
   min-height: 120vh;
   /* padding-top: 200px; --> */

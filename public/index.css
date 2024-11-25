@@ -11,13 +11,15 @@
   padding: 0;
 }
 
+html, body {
+  background-color: #1d131f; /* Use the same dark background as your body */
+}
+
 body {
   min-height: 120vh;
   /* padding-top: 200px; --> */
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-
-  background-color: #1d131f;
 }
 
 header {

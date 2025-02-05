@@ -1,4 +1,3 @@
-// src/app.js
 require('dotenv').config();  // Load environment variables
 const express = require('express');
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));

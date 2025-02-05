@@ -16,7 +16,7 @@
 
 ## How It Works  
 1. **Player Searches for Tracks**:  
-   - The player initiates a search by entering a query (e.g., a song name) in the app.  
+   - The player initiates a search by entering a query (e.g., a song name) in the search bar.  
    - The query is sent to the backend via the /api/search endpoint.  
 
 2. **Backend Handles Spotify API Authentication**:  

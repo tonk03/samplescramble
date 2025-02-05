@@ -1,9 +1,6 @@
 # SampleScramble
 
-**SampleScramble** is a music guessing game where players identify the original songs behind samples in popular tracks. Listen, guess, and test your knowledge of modern music.
-
-## Play Now  
-[SampleScramble](https://samplescramble.vercel.app/)
+**SampleScramble** is a music guessing game where players identify the original songs behind samples in popular tracks. Listen, guess, and test your knowledge of modern music. Play now at [SampleScramble](https://samplescramble.vercel.app/)
 
 ## Features  
 - **Search for songs** using Spotify’s Web API  
@@ -36,4 +33,3 @@
 ## Future Improvements  
 - Add a **leaderboard** to track top players  
 - Implement **user authentication** for personalized game history  
-- Enhance **mobile responsiveness** for better UX  

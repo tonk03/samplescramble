@@ -33,3 +33,4 @@
 ## Future Improvements  
 - Add a **leaderboard** to track top players  
 - Implement **user authentication** for personalized game history  
+- Utilize a token caching system for app.js to store and reuse the requested token until it expires (maybe 1 hour) 

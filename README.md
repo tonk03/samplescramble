@@ -33,4 +33,5 @@
 ## Future Improvements  
 - Add a **leaderboard** to track top players  
 - Implement **user authentication** for personalized game history  
-- Utilize a token caching system for app.js to store and reuse the requested token until it expires (maybe 1 hour) 
+- Utilize a token caching system for app.js to store and reuse the requested token until it expires (maybe 1 hour). Additionally, implement CORS and also rate limiting for api requests to backend
+- Add next and previous song buttons
